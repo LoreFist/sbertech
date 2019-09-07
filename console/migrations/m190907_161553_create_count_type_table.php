@@ -22,6 +22,11 @@ class m190907_161553_create_count_type_table extends Migration
             '{{%count_type}}',
             'id'
         );
+
+        $this->insert(
+            '{{%count_type}}',
+            ['name'=>'view']
+        );
     }
 
     /**

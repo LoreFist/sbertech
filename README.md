@@ -4,3 +4,7 @@
 </p>
 
 Инструкция по разворачиванию:
+```
+composer install
+php yii migrate
+```
