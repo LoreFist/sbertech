@@ -56,14 +56,6 @@ class m190907_161554_create_count_table extends Migration
             'NO ACTION'
         );
 
-        $this->addForeignKey(
-            'fk-card-id',
-            '{{%card}}',
-            'id',
-            '{{%count}}',
-            'card_id',
-            'NO ACTION'
-        );
     }
 
     /**
@@ -79,11 +71,6 @@ class m190907_161554_create_count_table extends Migration
         $this->dropForeignKey(
             'fk-count-type_id',
             '{{%count}}'
-        );
-
-        $this->dropForeignKey(
-            'fk-card-id',
-            '{{%card}}'
         );
 
         $this->dropIndex(

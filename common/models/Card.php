@@ -36,7 +36,6 @@ class Card extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'image_url'], 'string', 'max' => 255],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Count::className(), 'targetAttribute' => ['id' => 'card_id']],
         ];
     }
 
