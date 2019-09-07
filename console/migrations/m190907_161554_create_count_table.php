@@ -7,15 +7,17 @@ use yii\db\Migration;
  */
 class m190907_161554_create_count_table extends Migration
 {
+
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
         $this->createTable('{{%count}}', [
-            'id' => $this->primaryKey(),
-            'card_id'=>$this->integer()->notNull(),
-            'type_id'=> $this->integer()->notNull(),
+            'id'         => $this->primaryKey(),
+            'card_id'    => $this->integer()->notNull(),
+            'type_id'    => $this->integer()->notNull(),
+            'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
 
         $this->createIndex(
@@ -96,4 +98,5 @@ class m190907_161554_create_count_table extends Migration
 
         $this->dropTable('{{%count}}');
     }
+
 }

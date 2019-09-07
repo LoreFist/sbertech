@@ -7,13 +7,14 @@ use yii\db\Migration;
  */
 class m190907_161553_create_count_type_table extends Migration
 {
+
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
         $this->createTable('{{%count_type}}', [
-            'id' => $this->primaryKey(),
+            'id'   => $this->primaryKey(),
             'name' => $this->text(),
         ]);
 
@@ -25,7 +26,7 @@ class m190907_161553_create_count_type_table extends Migration
 
         $this->insert(
             '{{%count_type}}',
-            ['name'=>'view']
+            ['name' => 'view']
         );
     }
 
@@ -41,4 +42,5 @@ class m190907_161553_create_count_type_table extends Migration
 
         $this->dropTable('{{%count_type}}');
     }
+
 }

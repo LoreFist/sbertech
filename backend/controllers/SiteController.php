@@ -1,17 +1,12 @@
 <?php
+
 namespace backend\controllers;
 
-use Yii;
 use yii\web\Controller;
 
-/**
- * Site controller
- */
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+
     public function actions()
     {
         return [
@@ -21,13 +16,12 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
+    public function actionError()
     {
-        return $this->render('index');
+        $exception = Yii::$app->errorHandler->exception;
+        if ($exception !== null) {
+            return $this->render('error', ['exception' => $exception]);
+        }
     }
+
 }

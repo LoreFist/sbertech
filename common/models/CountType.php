@@ -7,13 +7,14 @@ use Yii;
 /**
  * This is the model class for table "count_type".
  *
- * @property int $id
- * @property string $name
+ * @property int     $id
+ * @property string  $name
  *
  * @property Count[] $counts
  */
 class CountType extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -38,7 +39,7 @@ class CountType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id'   => 'ID',
             'name' => 'Name',
         ];
     }
@@ -50,4 +51,5 @@ class CountType extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Count::className(), ['type_id' => 'id']);
     }
+
 }
