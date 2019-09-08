@@ -9,12 +9,12 @@ $this->title                   = 'Create Card';
 $this->params['breadcrumbs'][] = ['label' => 'Cards', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="card-create">
-
+<div class="container card-create">
+    <div class="row">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
+    </div>
 </div>

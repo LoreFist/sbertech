@@ -26,7 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'name',
             'description:ntext',
-            'image_url:url',
+            [
+                'attribute' => 'image_url',
+                'format' => 'html',
+                'value' => function ($data) {
+                    return Html::img($data->cardimage, ['width'=>200]);
+                },
+            ],
             'created_at',
             'updated_at',
 

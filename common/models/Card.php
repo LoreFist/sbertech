@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "card".
@@ -18,7 +19,7 @@ use Yii;
  */
 class Card extends \yii\db\ActiveRecord
 {
-
+    public $image;
     /**
      * {@inheritdoc}
      */
@@ -33,9 +34,12 @@ class Card extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name', 'description'], 'required'],
+            [['image_url'],  'required', 'on'=>'create'],
             [['description'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'image_url'], 'string', 'max' => 255],
+            [['image_url'], 'file', 'extensions' => 'jpg, jpeg, png'],
         ];
     }
 
@@ -62,4 +66,8 @@ class Card extends \yii\db\ActiveRecord
         return $this->hasMany(Count::className(), ['card_id' => 'id']);
     }
 
+    public function getCardimage()
+    {
+        return Url::to('@card_path_image/'.$this->image_url);
+    }
 }
