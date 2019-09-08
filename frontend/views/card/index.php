@@ -11,7 +11,8 @@ use yii\helpers\Html;
         </h2>
 
         <div class="item-excerpt">
-            <?= Html::encode(($card['_source']['description'])) ?>
+            Description: <?= Html::encode(($card['_source']['description'])) ?>
+            <div class="col"><?= ($card['_source']['count_view'] != 0)? 'Count view: '.Html::encode($card['_source']['count_view']) :""  ?></div>
         </div>
     </article>
 

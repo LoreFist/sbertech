@@ -1,0 +1,22 @@
+input {
+ jdbc {
+   jdbc_driver_library => "C:\Users\Tim\.PhpStorm2019.2\config\jdbc-drivers\MySQL Connector\J\5.1.47\mysql-connector-java-5.1.47.jar"
+   jdbc_driver_class => "com.mysql.jdbc.Driver"
+   jdbc_connection_string => "jdbc:mysql://127.0.0.1:3306/sberbank"
+   jdbc_user => "root"
+   jdbc_password => ""
+   statement => "SELECT card.*,Count(count.id) as count_view FROM card LEFT JOIN count ON count.card_id = card.id GROUP BY card.id"
+   jdbc_paging_enabled => "true"
+   jdbc_page_size => "50000"
+   schedule => "* * * * *"
+}
+}
+
+output{
+  elasticsearch{
+    index => "sberbank"
+    document_type => "card"
+    document_id => "%{id}"
+    hosts => "127.0.0.1:9200"
+  }stdout { codec => json_lines }
+}
