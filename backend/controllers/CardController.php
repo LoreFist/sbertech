@@ -24,6 +24,7 @@ class CardController extends Controller
     public function behaviors()
     {
         Yii::$app->name = 'Backed app ';
+
         return [
             'verbs' => [
                 'class'   => VerbFilter::className(),
@@ -42,7 +43,8 @@ class CardController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Card::find(),
+            'query' => Card::find()
+                ->joinWith(['counts', 'counts.type']),
         ]);
 
         return $this->render('index', [
@@ -60,13 +62,14 @@ class CardController extends Controller
     {
         $model = new Card();
 
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post())) {
 
             $model->image_url = $this->imageUpload($model)['name'];
 
             if ($model->validate()) {
-                if ($model->save())
+                if ($model->save()) {
                     return $this->redirect(['index']);
+                }
             }
         }
 
@@ -86,15 +89,16 @@ class CardController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model       = $this->findModel($id);
         $oldImageUrl = $model->image_url;
 
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post())) {
 
-            $model->image_url = $this->imageUpload($model,$oldImageUrl)['name'];
+            $model->image_url = $this->imageUpload($model, $oldImageUrl)['name'];
             if ($model->validate()) {
-                if ($model->save())
+                if ($model->save()) {
                     return $this->redirect(['index']);
+                }
             }
         }
 
@@ -108,30 +112,30 @@ class CardController extends Controller
         $imageFile = UploadedFile::getInstance($model, 'image_url');
 
         $directory = Yii::getAlias(Yii::$app->params['path_card_image']);
-        if (!is_dir($directory)) {
+        if ( ! is_dir($directory)) {
             FileHelper::createDirectory($directory);
         }
 
         if ($imageFile) {
-            $uid = uniqid(time(), true);
-            $fileName = $uid . '.' . $imageFile->extension;
-            $filePath = $directory . $fileName;
+            $uid      = uniqid(time(), true);
+            $fileName = $uid.'.'.$imageFile->extension;
+            $filePath = $directory.$fileName;
             if ($imageFile->saveAs($filePath)) {
-                $path = Yii::$app->params['path_card_image'] . Yii::$app->session->id . DIRECTORY_SEPARATOR . $fileName;
+                $path = Yii::$app->params['path_card_image'].Yii::$app->session->id.DIRECTORY_SEPARATOR.$fileName;
 
                 return
-                        [
-                            'file' => $imageFile,
-                            'name' => $fileName,
-                            'size' => $imageFile->size,
-                            'url' => $path,
-                            'path' => Url::to('@card_path_image/'.$fileName),
-                        ];
+                    [
+                        'file' => $imageFile,
+                        'name' => $fileName,
+                        'size' => $imageFile->size,
+                        'url'  => $path,
+                        'path' => Url::to('@card_path_image/'.$fileName),
+                    ];
 
             }
         }
 
-        return ['name'=>$oldImageUrl];
+        return ['name' => $oldImageUrl];
     }
 
     /**
@@ -149,8 +153,9 @@ class CardController extends Controller
 
         $directory = Yii::getAlias(Yii::$app->params['path_card_image']);
 
-        if($model->delete())
+        if ($model->delete()) {
             unlink($directory.$model->image_url);
+        }
 
         return $this->redirect(['index']);
     }

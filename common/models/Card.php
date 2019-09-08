@@ -19,7 +19,6 @@ use yii\helpers\Url;
  */
 class Card extends \yii\db\ActiveRecord
 {
-    public $image;
     /**
      * {@inheritdoc}
      */
@@ -35,7 +34,7 @@ class Card extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'description'], 'required'],
-            [['image_url'],  'required', 'on'=>'create'],
+            [['image_url'], 'required', 'on' => 'create'],
             [['description'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'image_url'], 'string', 'max' => 255],
@@ -70,4 +69,17 @@ class Card extends \yii\db\ActiveRecord
     {
         return Url::to('@card_path_image/'.$this->image_url);
     }
+
+    public function getViewCount()
+    {
+        $inc = 0;
+        foreach ($this->counts as $card_count) {
+            if ($card_count->type->name == 'view') {
+                $inc++;
+            }
+        }
+
+        return $inc;
+    }
+
 }

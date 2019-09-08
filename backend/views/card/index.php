@@ -28,17 +28,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             [
                 'attribute' => 'image_url',
-                'format' => 'html',
-                'value' => function ($data) {
-                    return Html::img($data->cardimage, ['width'=>200]);
+                'format'    => 'html',
+                'value'     => function ($data) {
+                    return Html::img($data->cardimage, ['width' => 200]);
+                },
+            ],
+            [
+                'attribute' => 'count_view',
+                'label'     => 'Count View',
+                'format'    => 'html',
+                'value'     => function ($data) {
+                    return $data->viewcount;
                 },
             ],
             'created_at',
             'updated_at',
-
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {delete}'
+                'class'    => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
             ],
         ],
     ]); ?>
