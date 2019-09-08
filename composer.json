@@ -12,12 +12,13 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.2.0",
-        "yiisoft/yii2": "~2.0.14",
+        "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "~2.0.0",
-        "kartik-v/yii2-widget-fileinput": "dev-master"
+        "kartik-v/yii2-widget-fileinput": "dev-master",
+        "yiisoft/yii2-elasticsearch": "~2.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
