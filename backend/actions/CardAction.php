@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\actions\card;
+namespace backend\actions;
 
 use Yii;
 use yii\base\Action;

@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\actions\card\CardAction;
+use backend\actions\CardAction;
 use Yii;
 use common\models\Card;
 use yii\data\ActiveDataProvider;
