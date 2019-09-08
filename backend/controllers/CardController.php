@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\actions\card\CardAction;
 use Yii;
 use common\models\Card;
 use yii\data\ActiveDataProvider;
@@ -67,7 +68,7 @@ class CardController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->image_url = $model->imageUpload($model)['name'];
+            $model->image_url = CardAction::imageUpload($model)['name'];
 
             if ($model->validate()) {
                 if ($model->save()) {
@@ -97,7 +98,7 @@ class CardController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->image_url = $model->imageUpload($model, $oldImageUrl)['name'];
+            $model->image_url = CardAction::imageUpload($model, $oldImageUrl)['name'];
             if ($model->validate()) {
                 if ($model->save()) {
                     return $this->redirect(['index']);
