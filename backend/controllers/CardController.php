@@ -65,6 +65,7 @@ class CardController extends Controller
     public function actionCreate()
     {
         $model = new Card();
+		$model->scenario = 'create';
 
         if ($model->load(Yii::$app->request->post())) {
 
